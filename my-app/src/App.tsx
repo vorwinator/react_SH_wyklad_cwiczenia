@@ -1,24 +1,29 @@
-import React from 'react';
+import React,{useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Button from './Components/Button';
 
-function App() {
+
+const App=()=> {
+  const[liczba,zmiana]=useState(0);
+  const dekrementacja=()=>{
+    zmiana(liczba-1);
+  }
+  const inkrementacja=()=>{
+    zmiana(liczba+1);
+  }
+  const reset=()=>{
+    zmiana(0);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button changeNumber={dekrementacja} nazwa="dekrementacja"/>
+      <Button changeNumber={inkrementacja} nazwa="inkrementacja"/>
+      <Button changeNumber={reset} nazwa="reset"/>
+      {liczba}
+      {liczba>10 && liczba<16 && (<div>Liczba większa od 10</div>)}
+      {liczba>15 && (<div>Liczba przekroczyła 15</div>)}
+      {liczba<-10 && (<div>Liczba mniejsza od -10</div>)}
     </div>
   );
 }
