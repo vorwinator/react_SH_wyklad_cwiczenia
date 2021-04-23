@@ -63,3 +63,140 @@ switch(zmienna){ //działa tak jak wszędzie
 for(let znak of string){   // podobno lepsza pętla for
 	console.log(znak);
 }
+
+
+
+
+NOTATKI 19.04.21
+
+npx -v
+npx create-react-app nazwa --template typescript
+
+cd nazwa
+yarn start (lub npm start)
+
+//package.json
+    "@material-ui/core": "^4.9.12",
+    "@material-ui/icons": "^4.9.1",    
+    "@types/react-redux": "^7.1.8",
+    "@types/react-router": "^5.1.7",
+    "@types/react-router-dom": "^5.1.5",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "reselect": "^4.0.0"
+
+//public/index.html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+yarn
+//instalacja paczek
+
+const App = () => (
+	return (
+	//cos
+	);
+);
+
+const App = () => {
+	const abc = 'test';
+	return(
+		<div className="App>
+		<CustomHeader />
+		</div>
+	);
+}
+
+//components/CustomHeader.tsx
+import React from 'react';
+import logo from '../logo.svg';
+
+const CustomHeader = () => {
+	return {
+		<header className="App-header">
+		<img src=(logo) className="App-logo" alt="logo" />
+		<p>
+		Edit <code>src/App.tsx</code> and save to reload.
+		</p>
+		<a
+ 		className="App-link"
+		href="https://reactjs.org"
+		target="_blank"
+		rel="noopener noreferrer"
+		>
+		Learn React
+		</a>
+		</header>
+	);
+};
+export default CustomHeader;
+
+//App.tsx
+import CustomHeader from '.components/CustomHeader';
+
+//components/Counter.tsx
+import React from 'react';
+
+const Counter = () => {
+	const [liczba, setLiczba] = React.useState(10);
+
+	const zwiekszLiczbe = () => {
+	setLiczba(liczba + 1);
+	}
+
+	const zmniejszLiczbe = () => {
+	setLiczba(liczba - 1);
+	}
+	return (
+		<div>
+		<button onClick={zwiekszLiczbe} >+</button>
+		{liczba}
+		<button onClick={zmniejszLiczbe} >+</button>
+		</div>
+	);
+}
+
+export default Counter;
+
+w App importować counter
+
+
+
+const Counter:React.FC<CounterProps> = (props) => {
+	const [liczba, setLiczba] = React.useState(props.initialNumber);
+
+	const zwiekszLiczbe = () => {
+		setLiczba(liczba + 1);
+	}
+
+	const zmniejszLiczbe = () => {
+		setLiczba(liczba - 1);
+	}
+	return (
+		<div>
+		<button onClick={zwiekszLiczbe} >+</button>
+		{liczba}
+		<button onClick={zmniejszLiczbe} >+</button>
+		</div>
+	);
+}
+
+interface CounterProps{
+	initialNumber: number;
+ }
+
+
+
+<div className="App>
+<Counter initialNumber={10} />
+</div>
+
+
+{children}
+
+if (onNumberChange) {
+	onNumberChange(number);
+} is equal to:
+	onNumberChange && onNumberChange(number);
