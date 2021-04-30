@@ -1,0 +1,58 @@
+zrobić folder views
+foldery na podstrony
+
+//Movie.tsx
+import React...
+
+interface MovieRouteParams {
+id: string;
+}
+
+const Movie = () => {
+const { id } = useParams<MovieRouteParams>();
+return (<div>`moviepage with id: ${id}`</div>);
+}
+
+export default Movie;
+
+
+//App.tsx
+import Movie from './views/movie/Movie'
+const App = () => {
+return (
+<div className="App">
+
+<BrowserRouter>
+<Switch>
+<Route path="/movie" component={Movie} />
+<Route path="/" component={Home} exact />
+<Route path="*" component={Page404}/>
+</Switch>
+</BrowseRouter>
+<Home />
+<Movie />
+);
+}
+
+//NavPanel.tsx
+const NavPanel = () => {
+
+const[isOpen,setIsOpen] = React.useState(false);
+const history = useHistory();
+const redirectTo = (path: string, name:string) => <div onClick={() => {history.push(path) }}>{name}</div>
+
+return (<div>
+<div onClick={() => setIsOpen(!isOpen)}<MenuIcon /> </div>
+<Drawer>
+open={isOpen}
+<div>
+<ul>
+<li><div >Home</div></li>
+<li>{redirectTo('/movie', 'Movie')}</li>
+</ul>
+</div>
+</Drawer>
+</div>
+);
+}
+export default NavPanel;
