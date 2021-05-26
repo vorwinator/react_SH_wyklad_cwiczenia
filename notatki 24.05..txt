@@ -1,0 +1,102 @@
+//actions/index.ts
+
+const context = new Map();
+const getAction = <T extends any>(Action: new ()=>T): T => {
+if(context.has(Action)){
+return context.get(Action);
+}
+
+const action = new Action();
+context.set(Action, action);
+return action;
+}
+
+//src.hooks/useAction.ts
+import React from 'react';
+import {getAction} from '../store/actions';
+
+export const useAction = <T>() => {
+const {current} = React.useRef(getAction(Action));
+return current;
+}
+
+//views/todoPanel/TodoPanel.tsx
+
+import React from 'react';
+
+const TodoPanel = () => {
+
+const todoActions=useAction(TodoService);
+const todos = useSelector(todoSelector.getAll);
+
+React.useEffect(() =>{
+store.dispatch(set.NewTodo({
+id: 123,
+label: 'testowy',
+done: false,
+description: 'pierwszywpis',
+}));
+}, []);
+
+const deleteTodo = (todo: Todo) =>{
+todoActions.setDeleteTodo(todo);
+}
+
+return (
+<div>
+{todos.map((todo, index) => (
+<div key={index}>
+<p>{todo.label}</p>
+<p>{todo.done}</p>
+<p>{todo.description}</p>
+</div>
+);
+}
+
+export default TodoPanel;
+
+//services/todo.service.ts
+import {Todo} from "../store/reducers/todos.reducer";
+export class TodoService{
+
+setNewTodo(todo: Todo){
+store.dispatch(todosActions.setNewTodo(todo));
+}
+
+setTodoDone(id: number){
+store.dispatch(todosActions.setTodoDone(todo.id));
+}
+
+setDeleteTodo(todo: Todo){
+store.dispatch(todosActions.setDeleteTodo(todo));
+}
+
+getAllTodos(){
+const response = await <any>http.get(url, {
+apikey: omdApiKey,
+s: name,
+page
+});
+
+if(response){
+store.dispatch(todosActions.setNewTodo({
+id: response.id,
+label: response.label,
+done: response.done,
+description: response.description
+}
+}
+
+//selectors/todo.selector.ts
+import {createSelector} from 'reselect';
+import {StoreState} from '../store';
+export const todoSelector = createSelector(
+(state: StoreState)=> state.todos,
+todos => todos.list,
+);
+
+const todoSelector = {
+getAll: createSelector(
+(state: StoreState) => state.todos,
+todos => todos.list,
+}
